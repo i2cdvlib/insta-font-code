@@ -1,36 +1,38 @@
 import streamlit as st
 
-# Add CSS to center the Instagram font image and style the text boxes
-st.write(
-    """
-    <style>
-    .center {
-        display: flex;
-        justify-content: center;
-    }
-    .small-font {
-        font-size: 12px;
-    }
-    .small-img {
-        width: 200px;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+# Define the HTML code
+html_code = '''
+<div style="background-color: #F8D7DA; padding: 20px; border-radius: 10px;">
+    <h1 style="color: #721C24; text-align: center;">Welcome to my Streamlit app!</h1>
+    <p style="color: #721C24; text-align: center;">Here's some text that I've styled using HTML and CSS.</p>
+</div>
+'''
 
-# Add the Instagram font image
-st.markdown(
-    f'<div class="center"><img class="small-img" src="https://i0.wp.com/www.dafontfree.io/wp-content/uploads/2020/12/instagram-new.png?resize=1100%2C750&ssl=1"></div>',
-    unsafe_allow_html=True,
-)
+# Define the CSS code
+css_code = '''
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F0F2F6;
+    padding: 20px;
+}
 
-# Add text boxes for the username and password fields
-username = st.text_input("Username", value="", max_chars=None, key=None, type='default', 
-                         help=None, placeholder='Username', 
-                         autocomplete='on', 
-                         style={'font-size': '12px'})
-password = st.text_input("Password", value="", max_chars=None, key=None, type='password', 
-                         help=None, placeholder='Password', 
-                         autocomplete='on', 
-                         style={'font-size': '12px'})
+h1 {
+    font-size: 36px;
+    text-align: center;
+}
+
+p {
+    font-size: 24px;
+    text-align: center;
+}
+'''
+
+# Render the HTML and CSS in Streamlit
+st.markdown(html_code, unsafe_allow_html=True)
+st.write('')
+st.markdown(f'<style>{css_code}</style>', unsafe_allow_html=True)
+
+# Add some Streamlit elements below the HTML and CSS
+st.write('Here are some Streamlit elements:')
+st.slider('Select a value', 0, 10, 5)
+st.button('Click me')
