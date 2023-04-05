@@ -20,11 +20,10 @@ st.write(
 )
 
 # Add the Instagram font image
-st.image('https://i0.wp.com/www.dafontfree.io/wp-content/uploads/2020/12/instagram-new.png?resize=1100%2C750&ssl=1', 
-         width=200, 
-         output_format='PNG', 
-         use_column_width=True,
-         style={'width': '200px', 'margin': '0 auto'})
+st.markdown(
+    f'<div class="center"><img class="small-img" src="https://i0.wp.com/www.dafontfree.io/wp-content/uploads/2020/12/instagram-new.png?resize=1100%2C750&ssl=1"></div>',
+    unsafe_allow_html=True,
+)
 
 # Add text boxes for the username and password fields
 username = st.text_input("Username", value="", max_chars=None, key=None, type='default', 
