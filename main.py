@@ -1,23 +1,19 @@
-import streamlit as st
+from flask import Flask, render_template, request
 
-# Set page title
-st.set_page_config(page_title='Instagram Login')
+app = Flask(__name__)
 
-# Page header
-st.title('Instagram Login')
+@app.route('/', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        # Add your authentication logic here
+        if username == 'myusername' and password == 'mypassword':
+            return 'Login successful!'
+            # Add your post-login logic here
+        else:
+            return 'Invalid username or password. Please try again.'
+    return render_template('login.html')
 
-# Render username input field with label
-st.markdown('**Enter your username**')
-username = st.text_input('', value='', max_chars=75, key='username')
-
-# Input field for password
-password = st.text_input('Password', type='password')
-
-# Login button
-if st.button('Login'):
-    # Add your authentication logic here
-    if username == 'myusername' and password == 'mypassword':
-        st.success('Login successful!')
-        # Add your post-login logic here
-    else:
-        st.error('Invalid username or password. Please try again.')
+if __name__ == '__main__':
+    app.run(debug=True)
