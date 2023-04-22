@@ -3,11 +3,16 @@ import socket
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
+addr = socket.gethostbyname(socket.gethostname())
+
 server.bind(("44.229.200.200", 200))
+
+print(addr)
 
 server.listen()
 
-client, addr = server.accept()
+while True:
+   server.accept()
 
      
 
